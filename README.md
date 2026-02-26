@@ -24,11 +24,3 @@ Since RAPT deals with AI analysis, the frontend translates raw JSON data into hu
 * **Skill Gap Analysis:** Maps arrays of "missing skills" into a clean, searchable chip container for quick review.
 * **AI Insights:** A dedicated section for "✨ AI Resume Insights" that renders qualitative feedback directly from the AI engine.
 
----
-
-### How to use this:
-
-1. Copy this section and paste it right after the **Backend Architecture** in your `README.md`.
-2. Ensure your `rapt-frontend` folder structure is consistent so others can follow your logic.
-
-**Would you like me to help you create a "Getting Started" guide that explains how to set up the `.env` variables for the frontend?**
