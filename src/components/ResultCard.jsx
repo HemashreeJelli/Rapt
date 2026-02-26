@@ -1,5 +1,4 @@
 import { useNavigate } from "react-router-dom";
-import RecommendedJobs from "./RecommendedJobs.jsx";
 
 export default function ResultCard({ result, resumeId }) {
   const navigate = useNavigate();
@@ -28,11 +27,6 @@ export default function ResultCard({ result, resumeId }) {
       >
         View Detailed Analysis →
       </button>
-
-      <RecommendedJobs
-   resumeId={result.resume_id}
-   token={localStorage.getItem("access_token")}
-/>
 
     </div>
   );
