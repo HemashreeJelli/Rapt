@@ -1,5 +1,6 @@
 import { useState } from "react";
 import api from "../api/axios";
+import "./UploadBox.css";
 
 export default function UploadBox({ onResult }) {
   const [file, setFile] = useState(null);
@@ -13,36 +14,28 @@ export default function UploadBox({ onResult }) {
 
     try {
       setLoading(true);
-
-      // ⭐ GET TOKEN FROM LOGIN (stored in localStorage)
       const token = localStorage.getItem("token");
 
-      console.log("TOKEN:", token); // optional debug
-
-      // STEP 1 — Upload file
       const uploadRes = await api.post("/upload-resume", formData, {
         headers: {
           "Content-Type": "multipart/form-data",
-          Authorization: `Bearer ${token}`, // ⭐ IMPORTANT FIX
+          Authorization: `Bearer ${token}`,
         },
       });
 
       const resume_id = uploadRes.data.file_id;
 
-      // STEP 2 — Call analysis endpoint
       const analysisRes = await api.post(
         `/analyze-resume/${resume_id}`,
         null,
         {
           headers: {
-            Authorization: `Bearer ${token}`, // ⭐ ALSO REQUIRED HERE
+            Authorization: `Bearer ${token}`,
           },
         }
       );
 
-      // STEP 3 — Send result to ResultCard
       onResult(analysisRes.data);
-
     } catch (err) {
       console.error(err);
       alert("Upload failed");
@@ -52,16 +45,36 @@ export default function UploadBox({ onResult }) {
   };
 
   return (
-    <div className="card">
-      <input
-        type="file"
-        accept="application/pdf"
-        onChange={(e) => setFile(e.target.files[0])}
-      />
+    <div className="upload-container">
+      <label className="upload-label">
+        <input
+          className="file-input"
+          type="file"
+          accept="application/pdf"
+          onChange={(e) => setFile(e.target.files[0])}
+        />
+        <span className="upload-icon">📄</span>
+        <span className="upload-title">
+          Click to browse or drag and drop
+        </span>
+        <span className="upload-subtitle">PDF files only (Max 5MB)</span>
+      </label>
+      
+      {file && (
+        <div className="file-name-display">
+          Selected: {file.name}
+        </div>
+      )}
 
-      <button onClick={uploadResume}>
-        {loading ? "Analyzing..." : "Analyze Resume"}
-      </button>
+      <div className="analyze-row">
+        <button 
+          className="upload-btn analyze-btn" 
+          onClick={uploadResume} 
+          disabled={!file || loading}
+        >
+          {loading ? "🚀 AI is Analyzing..." : "Analyze Resume"}
+        </button>
+      </div>
     </div>
   );
 }

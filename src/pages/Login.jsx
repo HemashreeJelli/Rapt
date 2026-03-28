@@ -1,98 +1,116 @@
 import { supabase } from "../api/supabase";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import "./Login.css";
 
 function Login() {
-
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
+  const [isLogin, setIsLogin] = useState(true);
+  const [errorMsg, setErrorMsg] = useState("");
+  
   const navigate = useNavigate();
 
-  const handleLogin = async () => {
-
-    const { data, error } = await supabase.auth.signInWithPassword({
-      email,
-      password,
-    });
-
-    if (error) {
-      alert(error.message);
-      return;
-    }
-
-    const token = data.session.access_token;
-    localStorage.setItem("token", token);
-
-    alert("Login successful");
-
-    try {
-      const res = await fetch("https://rapt-backend.onrender.com/profile", {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
+  const handleAuth = async () => {
+    setErrorMsg("");
+    if (isLogin) {
+      const { data, error } = await supabase.auth.signInWithPassword({
+        email,
+        password,
       });
 
-      const profile = await res.json();
-
-      // ⭐ Cache role locally for faster routing later
-      if (profile.role) {
-        localStorage.setItem("role", profile.role);
+      if (error) {
+        setErrorMsg(error.message);
+        return;
       }
 
-      // ⭐ Role-based navigation
-      if (profile.role === "recruiter") {
-        navigate("/recruiter");
-      } else {
-        // student flow
-        if (!profile.full_name || !profile.major || !profile.current_year) {
-          navigate("/setup-profile");
-        } else {
-          navigate("/dashboard");
+      const token = data.session.access_token;
+      localStorage.setItem("token", token);
+
+      try {
+        const res = await fetch("https://rapt-backend.onrender.com/profile", {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+
+        const profile = await res.json();
+
+        if (profile.role) {
+          localStorage.setItem("role", profile.role);
         }
+
+        if (profile.role === "recruiter") {
+          navigate("/recruiter");
+        } else {
+          if (!profile.full_name || !profile.major || !profile.current_year) {
+            navigate("/setup-profile");
+          } else {
+            navigate("/dashboard");
+          }
+        }
+      } catch (err) {
+        console.error(err);
+        navigate("/dashboard");
       }
+    } else {
+      const { error } = await supabase.auth.signUp({
+        email,
+        password,
+      });
 
-    } catch (err) {
-      console.error(err);
-      navigate("/dashboard");
+      if (error) {
+        setErrorMsg(error.message);
+        return;
+      }
+      
+      setIsLogin(true);
+      setErrorMsg("Signup successful! Please login.");
     }
-  };
-
-  const handleSignup = async () => {
-
-    const { error } = await supabase.auth.signUp({
-      email,
-      password,
-    });
-
-    if (error) {
-      alert(error.message);
-      return;
-    }
-
-    alert("Signup successful. You can now login.");
   };
 
   return (
-    <div>
-      <h1>RAPT Login</h1>
+    <div className="login-container">
+      <div className="space-particles"></div>
+      <div className="glow-orb"></div>
+      <div className="glow-orb"></div>
+      <div className="glow-orb"></div>
 
-      <input
-        placeholder="Email"
-        onChange={(e) => setEmail(e.target.value)}
-      />
+      <div className="login-card">
+        <h1>RAPT</h1>
+        <p>AI-Powered Recruitment Platform</p>
 
-      <input
-        placeholder="Password"
-        type="password"
-        onChange={(e) => setPassword(e.target.value)}
-      />
+        {errorMsg && <div className="error-msg">{errorMsg}</div>}
 
-      <button onClick={handleLogin}>Login</button>
+        <div className="login-inputs">
+          <input
+            placeholder="Email"
+            type="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
+          <input
+            placeholder="Password"
+            type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+        </div>
 
-      <button onClick={handleSignup}>
-        New user? Sign Up
-      </button>
+        <button className="auth-btn" onClick={handleAuth}>
+          {isLogin ? "Login" : "Sign Up"}
+        </button>
+
+        <button 
+          className="toggle-mode" 
+          onClick={() => {
+            setIsLogin(!isLogin);
+            setErrorMsg("");
+          }}
+        >
+          {isLogin ? "New to RAPT? Create an account" : "Already have an account? Login"}
+        </button>
+      </div>
     </div>
   );
 }

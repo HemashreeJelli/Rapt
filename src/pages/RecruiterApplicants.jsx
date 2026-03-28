@@ -41,57 +41,62 @@ export default function RecruiterApplicants() {
   return (
     <div className="container">
 
-      <h1>Applicants</h1>
+      <div className="dashboard-header">
+        <h1>Applicant Tracking System</h1>
+      </div>
 
-      {/* JOB SEARCH DROPDOWN */}
-      <select
-        value={selectedJob}
-        onChange={handleChange}
-        className="job-select"
-      >
-        <option value="">Select Job</option>
-
-        {jobs.map(job => (
-          <option key={job.id} value={job.id}>
-            {job.title}
-          </option>
-        ))}
-
-      </select>
+      <div className="analysis-card" style={{ marginBottom: "24px" }}>
+        <h3 style={{ marginBottom: "16px" }}>Filter by Job Posting</h3>
+        {/* JOB SEARCH DROPDOWN */}
+        <select
+          value={selectedJob}
+          onChange={handleChange}
+          style={{ marginBottom: 0 }}
+        >
+          <option value="">All Jobs / Select a Job</option>
+          {jobs.map(job => (
+            <option key={job.id} value={job.id}>
+              {job.title} - {job.company_name}
+            </option>
+          ))}
+        </select>
+      </div>
 
       {/* APPLICANTS TABLE */}
-      <table className="tracker-table">
-
-        <thead>
-          <tr>
-            <th>#</th>
-            <th>Candidate</th>
-            <th>Job</th>
-            <th>Status</th>
-          </tr>
-        </thead>
-
-        <tbody>
-          {applicants.map((app, index) => (
-
-            <tr key={app.id}>
-              <td>{index + 1}</td>
-
-              <td>{app.profiles?.full_name || "Candidate"}</td>
-
-              <td>{app.jobs?.title}</td>
-
-              <td>
-                <span className={`status-pill ${app.status}`}>
-                  {app.status}
-                </span>
-              </td>
+      <div className="tracker-table-wrapper">
+        <table className="tracker-table">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Candidate</th>
+              <th>Job</th>
+              <th>Status</th>
             </tr>
-
-          ))}
-        </tbody>
-
-      </table>
+          </thead>
+          <tbody>
+            {applicants.length === 0 ? (
+              <tr>
+                <td colSpan={4} style={{ textAlign: "center", opacity: 0.6 }}>
+                  No applicants found for this job.
+                </td>
+              </tr>
+            ) : (
+              applicants.map((app, index) => (
+                <tr key={app.id}>
+                  <td>{index + 1}</td>
+                  <td style={{ fontWeight: 500, color: "#fff" }}>{app.profiles?.full_name || "Unknown Candidate"}</td>
+                  <td>{app.jobs?.title}</td>
+                  <td>
+                    <span className={`status-pill ${app.status}`}>
+                      {app.status}
+                    </span>
+                  </td>
+                </tr>
+              ))
+            )}
+          </tbody>
+        </table>
+      </div>
 
     </div>
   );

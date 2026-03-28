@@ -51,44 +51,48 @@ function RecruiterDashboard() {
   return (
     <div className="container">
 
-      <h1>Recruiter Dashboard</h1>
-
-      <p>
-        Welcome {profile?.full_name || "Recruiter"} 👋
-      </p>
-
-      {/* ⭐ MAIN ACTIONS */}
-      <div style={{ marginTop: "20px" }} prove-style>
-
-        <button
-          onClick={() => navigate("/recruiter/add-job")}
-          style={{ marginRight: "10px" }}
-        >
-          ➕ Add Job
-        </button>
-
-        <button
-          onClick={() => navigate("/recruiter/applications")}
-        >
-          📄 View Applications
-        </button>
-
+      <div className="dashboard-header">
+        <h1>Recruiter Dashboard</h1>
       </div>
 
-      {/* ⭐ FUTURE SECTION */}
-      <div style={{ marginTop: "40px" }}>
-        <h3>Quick Info</h3>
-
-        <p>
-          From here you can create jobs, review applicants, and manage hiring
-          decisions using AI recommendations.
+      <div className="analysis-card">
+        <h2>Welcome, {profile?.full_name || "Recruiter"} 👋</h2>
+        <p className="company" style={{ marginTop: "8px" }}>
+          Manage your company's hiring process and review candidates efficiently.
         </p>
+
+        {/* ⭐ MAIN ACTIONS */}
+        <div style={{ display: "flex", gap: "16px", marginTop: "24px" }}>
+          <button
+            className="apply-btn"
+            onClick={() => navigate("/recruiter/add-job")}
+          >
+            ➕ Post a New Job
+          </button>
+
+          <button
+            className="view-analysis-btn"
+            onClick={() => navigate("/recruiter/applications")}
+          >
+            📄 View Applications
+          </button>
+        </div>
       </div>
 
-      <div style={{ marginTop: "40px" }}>
-        <button onClick={handleLogout}>
-          Logout
-        </button>
+      {/* ⭐ QUICK INFO SECTION */}
+      <div className="tracker-grid">
+        <div className="tracker-card">
+          <h3>Quick Actions</h3>
+          <p className="company">
+            From here you can create jobs, review applicants, and manage hiring decisions using AI recommendations.
+          </p>
+        </div>
+        <div className="tracker-card">
+          <h3>Analytics Overview</h3>
+          <p className="company">
+            Insights and analytics on your job posts will appear here.
+          </p>
+        </div>
       </div>
 
     </div>

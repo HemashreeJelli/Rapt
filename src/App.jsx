@@ -84,30 +84,37 @@ function App() {
         } />
         
         <Route
-        path="/recruiter"
-        element={
-          <ProtectedRoute requiredRole="recruiter">
-            <RecruiterDashboard />
-          </ProtectedRoute>
-        }
-      />
+          path="/recruiter"
+          element={
+            <ProtectedRoute requiredRole="recruiter">
+              <AppLayout>
+                <RecruiterDashboard />
+              </AppLayout>
+            </ProtectedRoute>
+          }
+        />
 
-      <Route
-  path="/recruiter/add-job"
-  element={
-    <ProtectedRoute requiredRole="recruiter">
-      <AddJob />
-    </ProtectedRoute>
-  }
-/>
-      <Route
-        path="/recruiter/applications"
-        element={
-          <ProtectedRoute requiredRole="recruiter">
-            <RecruiterApplicants />
-          </ProtectedRoute>
-        }
-      />
+        <Route
+          path="/recruiter/add-job"
+          element={
+            <ProtectedRoute requiredRole="recruiter">
+              <AppLayout>
+                <AddJob />
+              </AppLayout>
+            </ProtectedRoute>
+          }
+        />
+        
+        <Route
+          path="/recruiter/applications"
+          element={
+            <ProtectedRoute requiredRole="recruiter">
+              <AppLayout>
+                <RecruiterApplicants />
+              </AppLayout>
+            </ProtectedRoute>
+          }
+        />
 
       </Routes>
     </BrowserRouter>

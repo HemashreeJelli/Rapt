@@ -91,43 +91,56 @@ function ProfileSetup() {
 
   return (
     <div className="container">
-      <h1>Complete Your Profile</h1>
+      <div className="dashboard-header">
+        <h1>Complete Your Profile</h1>
+      </div>
 
-      {/* ⭐ ROLE SELECTOR */}
-      <select
-        value={role}
-        onChange={(e) => setRole(e.target.value)}
-      >
-        <option value="student">Student</option>
-        <option value="recruiter">Recruiter</option>
-      </select>
+      <div className="analysis-card" style={{ maxWidth: "600px" }}>
+        <p className="company" style={{ marginBottom: "24px" }}>
+          Please provide your details below to finalize your account setup.
+        </p>
 
-      <input
-        placeholder="Full Name"
-        value={fullName}
-        onChange={(e) => setFullName(e.target.value)}
-      />
+        {/* ⭐ ROLE SELECTOR */}
+        <select
+          value={role}
+          onChange={(e) => setRole(e.target.value)}
+        >
+          <option value="student">Student</option>
+          <option value="recruiter">Recruiter</option>
+        </select>
 
-      {/* ⭐ STUDENT ONLY FIELDS */}
-      {role === "student" && (
-        <>
-          <input
-            placeholder="Major"
-            value={major}
-            onChange={(e) => setMajor(e.target.value)}
-          />
+        <input
+          placeholder="Full Name"
+          value={fullName}
+          onChange={(e) => setFullName(e.target.value)}
+        />
 
-          <input
-            placeholder="Current Year"
-            value={currentYear}
-            onChange={(e) => setCurrentYear(e.target.value)}
-          />
-        </>
-      )}
+        {/* ⭐ STUDENT ONLY FIELDS */}
+        {role === "student" && (
+          <>
+            <input
+              placeholder="Major (e.g. Computer Science)"
+              value={major}
+              onChange={(e) => setMajor(e.target.value)}
+            />
 
-      <button onClick={handleSave}>
-        {loading ? "Saving..." : "Save Profile"}
-      </button>
+            <input
+              placeholder="Current Year (e.g. Junior)"
+              value={currentYear}
+              onChange={(e) => setCurrentYear(e.target.value)}
+            />
+          </>
+        )}
+
+        <button 
+          className="upload-btn" 
+          onClick={handleSave} 
+          disabled={loading}
+          style={{ width: "100%", marginTop: "12px" }}
+        >
+          {loading ? "🚀 Saving..." : "✅ Save Profile"}
+        </button>
+      </div>
     </div>
   );
 }

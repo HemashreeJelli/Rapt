@@ -1,37 +1,48 @@
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
+import "./Navbar.css";
 
 export default function Navbar() {
   const navigate = useNavigate();
+  const location = useLocation();
+
+  const role = localStorage.getItem("role");
 
   const handleLogout = () => {
-    // 1. Clear the authentication data
     localStorage.removeItem("token");
-    
-    // 2. Redirect the user to the login or landing page
+    localStorage.removeItem("role");
     navigate("/");
-    
-    // Optional: Force a page reload if you want to clear all app state
-    // window.location.reload(); 
   };
+
+  const handleBrandClick = () => {
+    if (role === "recruiter") navigate("/recruiter")
+    else navigate("/dashboard");
+  }
+
+  const isActive = (path) => location.pathname === path ? "active" : "";
 
   return (
     <div className="navbar">
-      <h3 onClick={() => navigate("/dashboard")} style={{ cursor: 'pointer' }}>
-        RAPT
-      </h3>
+      <div className="navbar-brand" onClick={handleBrandClick}>
+        RAPT.
+      </div>
 
-      <div className="nav-links">
-        <button onClick={() => navigate("/dashboard")}>Dashboard</button>
-        <button onClick={() => navigate("/resumes")}>Resume Versions</button>
-        <button onClick={() => navigate("/upload")}>Upload</button>
-        <button onClick={() => navigate("/jobs")}>Job Listings</button>
-        
-        {/* 🔥 NEW LOGOUT BUTTON */}
-        <button 
-          onClick={handleLogout} 
-          className="logout-btn"
-          style={{ backgroundColor: '#ff4d4d', color: 'white' }}
-        >
+      {role === "recruiter" ? (
+        <div className="nav-links">
+          <button className={`nav-btn ${isActive("/recruiter")}`} onClick={() => navigate("/recruiter")}>Dashboard</button>
+          <button className={`nav-btn ${isActive("/recruiter/add-job")}`} onClick={() => navigate("/recruiter/add-job")}>Post a Job</button>
+          <button className={`nav-btn ${isActive("/recruiter/applications")}`} onClick={() => navigate("/recruiter/applications")}>Applications</button>
+        </div>
+      ) : (
+        <div className="nav-links">
+          <button className={`nav-btn ${isActive("/dashboard")}`} onClick={() => navigate("/dashboard")}>Dashboard</button>
+          <button className={`nav-btn ${isActive("/resumes")}`} onClick={() => navigate("/resumes")}>Resume Versions</button>
+          <button className={`nav-btn ${isActive("/upload")}`} onClick={() => navigate("/upload")}>Upload</button>
+          <button className={`nav-btn ${isActive("/jobs")}`} onClick={() => navigate("/jobs")}>Job Listings</button>
+        </div>
+      )}
+
+      <div className="logout-wrap">
+        <button onClick={handleLogout} className="nav-btn logout-btn">
           Logout
         </button>
       </div>

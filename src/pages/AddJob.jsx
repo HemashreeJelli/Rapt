@@ -82,35 +82,48 @@ function AddJob() {
   return (
     <div className="container">
 
-      <h1>Add New Job</h1>
+      <div className="dashboard-header">
+        <h1>Create a New Job Listing</h1>
+      </div>
 
-      <input
-        placeholder="Company Name"
-        value={companyName}
-        onChange={(e) => setCompanyName(e.target.value)}
-      />
+      <div className="analysis-card" style={{ maxWidth: "700px" }}>
+        <p className="company" style={{ marginBottom: "24px" }}>
+          Fill out the details below to post a new job. Candidates will be able to apply immediately.
+        </p>
 
-      <input
-        placeholder="Job Title"
-        value={title}
-        onChange={(e) => setTitle(e.target.value)}
-      />
+        <input
+          placeholder="Company Name"
+          value={companyName}
+          onChange={(e) => setCompanyName(e.target.value)}
+        />
 
-      <textarea
-        placeholder="Job Description"
-        value={description}
-        onChange={(e) => setDescription(e.target.value)}
-      />
+        <input
+          placeholder="Job Title"
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
+        />
 
-      <input
-        placeholder="Requirements (comma separated)"
-        value={requirements}
-        onChange={(e) => setRequirements(e.target.value)}
-      />
+        <textarea
+          placeholder="Job Description"
+          value={description}
+          onChange={(e) => setDescription(e.target.value)}
+        />
 
-      <button onClick={handleSubmit} disabled={loading}>
-        {loading ? "Creating..." : "Create Job"}
-      </button>
+        <input
+          placeholder="Requirements (e.g. React, Node.js, Python)"
+          value={requirements}
+          onChange={(e) => setRequirements(e.target.value)}
+        />
+
+        <button 
+          className="upload-btn"
+          onClick={handleSubmit} 
+          disabled={loading}
+          style={{ width: "100%", marginTop: "12px" }}
+        >
+          {loading ? "🚀 Creating..." : "➕ Create Job Post"}
+        </button>
+      </div>
 
     </div>
   );
