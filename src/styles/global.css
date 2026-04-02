@@ -1,4 +1,4 @@
-/* ⭐ MAIN APP LAYOUT */
+/* MAIN APP LAYOUT */
 .layout {
   display: flex;
   min-height: 100vh;
@@ -7,7 +7,7 @@
   color: var(--color-text-main);
 }
 
-/* ⭐ SIDEBAR */
+/* SIDEBAR */
 .navbar {
   width: 260px;
   flex-shrink: 0;
@@ -24,7 +24,7 @@
   z-index: 100;
 }
 
-/* ⭐ CONTENT AREA */
+/* CONTENT AREA */
 .main-content {
   flex: 1;
   min-width: 0;

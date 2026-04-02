@@ -7,20 +7,20 @@ export default function Jobs() {
   const [resumeId, setResumeId] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  // 🔹 Load resume + jobs
+  // Load resume + jobs
   useEffect(() => {
 
     const init = async () => {
       try {
 
-        // ⭐ get latest resume
+        // Get latest resume
         const resumeRes = await api.get("/my-resumes");
 
         if(resumeRes.data.length){
           setResumeId(resumeRes.data[0].id);
         }
 
-        // ⭐ get jobs
+        // Get jobs
         const jobRes = await api.get("/jobs");
         setJobs(jobRes.data);
 
@@ -37,7 +37,7 @@ export default function Jobs() {
 
   console.log("RESUME ID:", resumeId);
 
-  // 🔹 Apply function
+  // Apply function
   const apply = async (jobId) => {
     try {
 
@@ -45,7 +45,7 @@ export default function Jobs() {
         resume_id: resumeId
       });
 
-      alert("Applied successfully 🚀");
+      alert("Applied successfully");
 
     } catch (e) {
 

@@ -5,12 +5,12 @@ function ProtectedRoute({ children, requiredRole }) {
   const token = localStorage.getItem("token");
   const role = localStorage.getItem("role");
 
-  // 🚫 Not logged in
+  // Not logged in
   if (!token) {
     return <Navigate to="/" />;
   }
 
-  // 🔐 Role restriction
+  // Role restriction
   if (requiredRole && role !== requiredRole) {
     return <Navigate to="/dashboard" />;
   }

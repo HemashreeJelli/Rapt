@@ -11,7 +11,7 @@ function ProfileSetup() {
 
   const navigate = useNavigate();
 
-  // ⭐ Load existing profile data
+  // Load existing profile data
   useEffect(() => {
 
     const fetchProfile = async () => {
@@ -44,7 +44,7 @@ function ProfileSetup() {
 
   }, []);
 
-  // ⭐ Save profile
+  // Save profile
   const handleSave = async () => {
 
     const token = localStorage.getItem("token");
@@ -69,12 +69,12 @@ function ProfileSetup() {
         }),
       });
 
-      // ⭐ Store role locally
+      // Store role locally
       localStorage.setItem("role", role);
 
       alert("Profile saved successfully!");
 
-      // ⭐ Redirect based on role
+      // Redirect based on role
       if (role === "recruiter") {
         navigate("/recruiter");
       } else {
@@ -100,7 +100,7 @@ function ProfileSetup() {
           Please provide your details below to finalize your account setup.
         </p>
 
-        {/* ⭐ ROLE SELECTOR */}
+        {/* ROLE SELECTOR */}
         <select
           value={role}
           onChange={(e) => setRole(e.target.value)}
@@ -115,7 +115,7 @@ function ProfileSetup() {
           onChange={(e) => setFullName(e.target.value)}
         />
 
-        {/* ⭐ STUDENT ONLY FIELDS */}
+        {/* STUDENT ONLY FIELDS */}
         {role === "student" && (
           <>
             <input
@@ -138,7 +138,7 @@ function ProfileSetup() {
           disabled={loading}
           style={{ width: "100%", marginTop: "12px" }}
         >
-          {loading ? "🚀 Saving..." : "✅ Save Profile"}
+          {loading ? "Saving..." : "Save Profile"}
         </button>
       </div>
     </div>

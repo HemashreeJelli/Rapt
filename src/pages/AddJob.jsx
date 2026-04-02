@@ -121,7 +121,7 @@ function AddJob() {
           disabled={loading}
           style={{ width: "100%", marginTop: "12px" }}
         >
-          {loading ? "🚀 Creating..." : "➕ Create Job Post"}
+          {loading ? "Creating..." : "Create Job Post"}
         </button>
       </div>
 

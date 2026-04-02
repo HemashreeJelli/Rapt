@@ -7,7 +7,7 @@ export default function RecruiterApplicants() {
   const [selectedJob, setSelectedJob] = useState("");
   const [applicants, setApplicants] = useState([]);
 
-  // 🔹 load recruiter's jobs
+  // Load recruiter's jobs
   useEffect(() => {
 
     const loadJobs = async () => {
@@ -22,7 +22,7 @@ export default function RecruiterApplicants() {
     loadJobs();
   }, []);
 
-  // 🔹 fetch applicants
+  // Fetch applicants
   const fetchApplicants = async (jobId) => {
     try {
       const res = await api.get(`/recruiter/applicants/${jobId}`);

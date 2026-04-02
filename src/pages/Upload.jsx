@@ -13,7 +13,7 @@ export default function Upload() {
 
       <UploadBox onResult={setResult} />
 
-      {/* ⭐ SHOW RESULT ONLY WHEN AVAILABLE */}
+      {/* SHOW RESULT ONLY WHEN AVAILABLE */}
       {result && (
         <ResultCard
           result={result}

@@ -1,8 +1,8 @@
-import { useNavigate } from "react-router-dom";   // 🔥 NEW
+import { useNavigate } from "react-router-dom";
 
 export default function ResumeCard({ resume }) {
 
-  const navigate = useNavigate();   // 🔥 NEW
+  const navigate = useNavigate();
 
   const analysis = resume.analysis?.[0];
 

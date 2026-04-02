@@ -56,30 +56,30 @@ function RecruiterDashboard() {
       </div>
 
       <div className="analysis-card">
-        <h2>Welcome, {profile?.full_name || "Recruiter"} 👋</h2>
+        <h2>Welcome, {profile?.full_name || "Recruiter"}</h2>
         <p className="company" style={{ marginTop: "8px" }}>
           Manage your company's hiring process and review candidates efficiently.
         </p>
 
-        {/* ⭐ MAIN ACTIONS */}
+        {/* MAIN ACTIONS */}
         <div style={{ display: "flex", gap: "16px", marginTop: "24px" }}>
           <button
             className="apply-btn"
             onClick={() => navigate("/recruiter/add-job")}
           >
-            ➕ Post a New Job
+            Post a New Job
           </button>
 
           <button
             className="view-analysis-btn"
             onClick={() => navigate("/recruiter/applications")}
           >
-            📄 View Applications
+            View Applications
           </button>
         </div>
       </div>
 
-      {/* ⭐ QUICK INFO SECTION */}
+      {/* QUICK INFO SECTION */}
       <div className="tracker-grid">
         <div className="tracker-card">
           <h3>Quick Actions</h3>

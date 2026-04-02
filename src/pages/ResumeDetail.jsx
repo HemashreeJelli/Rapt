@@ -87,7 +87,7 @@ export default function ResumeDetail() {
         <div className="analysis-card">
           <h2>Missing Core Skills</h2>
           {missingSkills.length === 0 ? (
-            <p className="success-text">No major skill gaps detected 🎉</p>
+            <p className="success-text">No major skill gaps detected</p>
           ) : (
             <div className="skill-container">
               {missingSkills.map((skill, index) => (
@@ -107,7 +107,7 @@ export default function ResumeDetail() {
           ) : (
             insights.map((text, i) => (
               <p key={i} className="ai-line">
-                <span className="sparkle">✨</span> {text}
+                {text}
               </p>
             ))
           )}

@@ -27,14 +27,14 @@ export default function RecommendedJobs() {
   if (loading) {
     return (
       <p className="loading-text">
-        🤖 AI is analyzing your resume...
+        Analyzing your resume...
       </p>
     );
   }
 
   return (
     <div className="recommended-container">
-      <h2 className="recommended-title">Recommended Jobs 🤖</h2>
+      <h2 className="recommended-title">Recommended Jobs</h2>
 
       {jobs.length === 0 && (
         <p className="loading-text">No strong matches yet.</p>

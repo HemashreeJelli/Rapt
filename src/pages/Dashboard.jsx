@@ -12,7 +12,7 @@ export default function Dashboard() {
         <h1>Dashboard</h1>
       </div>
 
-      {/* ⭐ Application Tracker Section */}
+      {/* Application Tracker Section */}
       <div className="applications-section">
   <h2>My Applications</h2>
   <ApplicationTracker />

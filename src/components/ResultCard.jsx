@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 export default function ResultCard({ result, resumeId }) {
   const navigate = useNavigate();
 
-  // 🛡️ Safety guard
+  // Safety guard
   if (!result || !resumeId) return null;
 
   return (
